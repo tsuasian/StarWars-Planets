@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Table from './components/Table';
 import Navbar from './components/Navbar'
 import Card from './components/Card'
+import Graph from './components/Graph'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -16,6 +17,8 @@ class Main extends Component {
       showTable: true,
       showGraph: false
     }
+    this.showGraphHandler.bind(this)
+    this.showTableHandler.bind(this)
   }
 
   componentDidMount() {
@@ -31,12 +34,12 @@ class Main extends Component {
           // format numbers later
           let planet = {}
           planet['name'] = rawData[i].name
-          planet['population'] = rawData[i].population
-          planet['rotation'] = rawData[i].rotation_period
-          planet['orbital'] = rawData[i].orbital_period
-          planet['diameter'] = rawData[i].diameter
+          planet['population'] = !isNaN(rawData[i].population) ? this.formatNumbers(rawData[i].population) : rawData[i].population
+          planet['rotation'] = !isNaN(rawData[i].rotation_period) ? this.formatNumbers(rawData[i].rotation_period) : rawData[i].rotation_period
+          planet['orbital'] = !isNaN(rawData[i].orbital_period) ? this.formatNumbers(rawData[i].orbital_period) : rawData[i].orbital_period
+          planet['diameter'] = !isNaN(rawData[i].diameter) ? this.formatNumbers(rawData[i].diameter) : rawData[i].diameter
           planet['climate'] = rawData[i].climate
-          planet['surfaceWater'] = rawData[i].surface_water
+          planet['surfaceWater'] = !isNaN(rawData[i].surface_water) ? this.formatNumbers(rawData[i].surface_water) : rawData[i].surface_water
           planets.push(planet)
         }
 
@@ -58,12 +61,30 @@ class Main extends Component {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
+  showGraphHandler(e) {
+    e.preventDefault();
+    this.setState({
+      showTable: false,
+      showGraph: true
+    })
+  }
+
+  showTableHandler(e) {
+    e.preventDefault();
+    this.setState({
+      showTable: true,
+      showGraph: false
+    })
+  }
+
   render() {
     return (
       <div className="main-container">
-        <Navbar />
+        <Navbar graphClick = {(e) => this.showGraphHandler(e)} tableClick = {(e) => this.showTableHandler(e)}/>
         <div className="card-container">
-          <Card table = {<Table planetData = {this.state.planetData} />}/>
+          {this.state.showTable ? <Card table = {<Table planetData = {this.state.planetData} />}/>
+          : <Graph />}
+
         </div>
       </div>
     )
