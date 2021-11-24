@@ -60,7 +60,3 @@ class TableHeader extends Component {
 }
 
 export default TableHeader;
-
-// {this.state.finishedLoading ?
-// : <Loading />}
-// if planetData props < 60 diplay loading --> display table when all data is loaded

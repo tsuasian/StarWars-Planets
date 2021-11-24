@@ -33,6 +33,7 @@ class Main extends Component {
         for (let i = 0; i < rawData.length; i++) {
           // format numbers later
           let planet = {}
+          planet['key'] = rawData[i].name
           planet['name'] = rawData[i].name
           planet['population'] = !isNaN(rawData[i].population) ? this.formatNumbers(rawData[i].population) : rawData[i].population
           planet['rotation'] = !isNaN(rawData[i].rotation_period) ? this.formatNumbers(rawData[i].rotation_period) : rawData[i].rotation_period

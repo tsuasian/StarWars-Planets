@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 class CardBootstrap extends Component {
   render () {
     return (
-      <Card style={{ overflow:'auto', width:'100%', textAlign:'center'}}>
+      <Card style={{ overflow:'auto', width:'100%'}}>
         <Card.Body>
             {this.props.table}
         </Card.Body>
