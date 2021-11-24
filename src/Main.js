@@ -14,8 +14,8 @@ class Main extends Component {
     super(props);
     this.state = {
       planetData: [],
-      showTable: true,
-      showGraph: false
+      showTable: JSON.parse(localStorage.getItem('showTable')),
+      showGraph: JSON.parse(localStorage.getItem('showGraph'))
     }
     this.showGraphHandler.bind(this)
     this.showTableHandler.bind(this)
@@ -66,7 +66,10 @@ class Main extends Component {
     this.setState({
       showTable: false,
       showGraph: true
-    })
+    }, () => {
+      localStorage.setItem('showTable', JSON.stringify(this.state.showTable))
+      localStorage.setItem('showGraph', JSON.stringify(this.state.showGraph))
+    });
   }
 
   showTableHandler(e) {
@@ -74,7 +77,10 @@ class Main extends Component {
     this.setState({
       showTable: true,
       showGraph: false
-    })
+    }, () => {
+      localStorage.setItem('showTable', JSON.stringify(this.state.showTable))
+      localStorage.setItem('showGraph', JSON.stringify(this.state.showGraph))
+    });
   }
 
   render() {
