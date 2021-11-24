@@ -83,8 +83,7 @@ class Main extends Component {
         <Navbar graphClick = {(e) => this.showGraphHandler(e)} tableClick = {(e) => this.showTableHandler(e)}/>
         <div className="card-container">
           {this.state.showTable ? <Card table = {<Table planetData = {this.state.planetData} />}/>
-          : <Graph />}
-
+          : <Graph planetData = {this.state.planetData}/>}
         </div>
       </div>
     )
@@ -92,7 +91,3 @@ class Main extends Component {
 }
 
 export default Main;
-
-// How to Paginate:
-// Divide data up by into sets of 10, pass a set of 10 elements to Table element
-// Add pagination (BS) element and add onclicks to point to appropriate page
