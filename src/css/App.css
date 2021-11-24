@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5vh;
+  padding: 5vh;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -1,7 +1,8 @@
 import './css/App.css';
 import React, { Component } from 'react';
 import Table from './components/Table';
-import TableHeader from './components/TableHeader'
+import Navbar from './components/Navbar'
+import Card from './components/Card'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -11,7 +12,9 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      planetData: []
+      planetData: [],
+      showTable: true,
+      showGraph: false
     }
   }
 
@@ -25,6 +28,7 @@ class Main extends Component {
         let rawData = resp.data.results
         let planets = []
         for (let i = 0; i < rawData.length; i++) {
+          // format numbers later
           let planet = {}
           planet['name'] = rawData[i].name
           planet['population'] = rawData[i].population
@@ -50,11 +54,17 @@ class Main extends Component {
       })
   }
 
+  formatNumbers(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
   render() {
     return (
       <div className="main-container">
-        <TableHeader planetData = {this.state.planetData} />
+        <Navbar />
+        <div className="card-container">
+          <Card table = {<Table planetData = {this.state.planetData} />}/>
+        </div>
       </div>
     )
   }
