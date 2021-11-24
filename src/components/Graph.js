@@ -31,7 +31,7 @@ class Graph extends Component {
         },
         title: {
           display: true,
-          text: 'Planet Attribute Bar Char',
+          text: 'Planet Attribute Bar Chart',
         },
       },
       barThickness: 'flex',
