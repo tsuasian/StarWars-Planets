@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import BootStrapTable from 'react-bootstrap/Table';
-import axios from 'axios'
 
 class Table extends Component {
   constructor(props) {
@@ -11,25 +10,9 @@ class Table extends Component {
   }
 
   componentDidMount() {
-    // this.retrieveData()
+
   }
 
-  retrieveData() {
-    let pageNumber = 1
-    while (pageNumber <= 6) {
-      axios.get(`https://swapi.dev/api//planets/?page=${pageNumber}`)
-        .then((resp) =>  {
-          let planets = resp.data.results
-          this.setState({
-            planetData: [...this.state.planetData, ...planets]
-          })
-        })
-        .catch((err) => {
-          console.log("Error: ", err)
-        })
-      pageNumber++;
-    }
-  }
 
   render() {
     console.log(this.props.planetData, "test")
